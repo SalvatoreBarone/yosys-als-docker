@@ -25,7 +25,6 @@ RUN git clone https://github.com/YosysHQ/yosys
 RUN	git clone https://github.com/Boolector/boolector.git
 # RUN git clone https://github.com/albmoriconi/yosys-als.git
 
-
 ## Compiling Boolector
 WORKDIR /boolector
 RUN ./contrib/setup-lingeling.sh
@@ -39,6 +38,11 @@ WORKDIR /yosys
 RUN make -j `nproc`
 
 ## Compiling Yosys-als
-# WORKDIR /yosys-als
-# make -j `nproc`
+RUN mkdir -p /yosys-als/build
+WORKDIR /yosys-als/build
+RUN cmake ..
+RUN make -j `nproc`
+
+WORKDIR /
+
 
