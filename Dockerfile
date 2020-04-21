@@ -38,10 +38,10 @@ WORKDIR /yosys
 RUN make -j `nproc`
 
 ## Compiling Yosys-als
-RUN mkdir -p /yosys-als/build
-WORKDIR /yosys-als/build
-RUN cmake ..
-RUN make -j `nproc`
+# RUN mkdir -p /yosys-als/build
+# WORKDIR /yosys-als/build
+# RUN cmake ..
+# RUN make -j `nproc`
 
 WORKDIR /
 
