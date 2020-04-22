@@ -32,6 +32,7 @@ RUN ./contrib/setup-btor2tools.sh
 RUN ./configure.sh --shared
 WORKDIR /boolector/build
 RUN make -j `nproc`
+RUN make install -j `nproc`
 
 ## Compiling Yosys
 WORKDIR /yosys
