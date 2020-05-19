@@ -3,7 +3,7 @@ LABEL maintainer="Salvatore Barone <salvator.barone@gmail.com>"
 LABEL maintainer="Alberto Moriconi <albmoriconi@gmail.com>"
 
 RUN apt-get update
-RUN apt-get install -y 	check cmake libxml2-dev libssl-dev lcov doxygen \
+RUN apt-get install -y 	check libxml2-dev libssl-dev lcov doxygen \
 						doxygen-gui doxygen-latex wget g++ make zsh vim-nox \
 						fonts-powerline fzf git openssh-client build-essential \
 						clang bison flex libreadline-dev gawk tcl-dev \
@@ -11,6 +11,15 @@ RUN apt-get install -y 	check cmake libxml2-dev libssl-dev lcov doxygen \
 						libboost-system-dev libboost-python-dev \
 						libsqlite3-dev libboost-filesystem-dev zlib1g-dev curl \
 						libeigen3-dev gdb 
+# Getting Cmake
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.17.0/cmake-3.17.0.tar.gz
+RUN tar -xzf cmake-3.17.0.tar.gz
+WORKDIR cmake-3.17.0 
+RUN ./bootstrap 
+RUN make -j `nproc` 
+RUN make install -j `nproc`
+
+WORKDIR /
 
 ## Getting oh-my-zsh and vim plugins
 RUN wget --quiet https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
