@@ -9,7 +9,8 @@ RUN apt-get install -y 	check cmake libxml2-dev libssl-dev lcov doxygen \
 						clang bison flex libreadline-dev gawk tcl-dev \
 						libffi-dev graphviz xdot pkg-config python3 \
 						libboost-system-dev libboost-python-dev \
-						libboost-filesystem-dev zlib1g-dev curl libeigen3-dev
+						libsqlite3-dev libboost-filesystem-dev zlib1g-dev curl \
+						libeigen3-dev gdb 
 
 ## Getting oh-my-zsh and vim plugins
 RUN wget --quiet https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
@@ -20,10 +21,11 @@ RUN	git clone https://gitlab.com/SalvatoreBarone/myvimrc.git && \
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
 	vim +PluginInstall +qall
 
-## Getting Yosys, Boolector and Yosys-ALS
+## Getting Yosys, Boolector, AMOSA and Yosys-ALS
 RUN git clone https://github.com/YosysHQ/yosys
 RUN	git clone https://github.com/Boolector/boolector.git
-# RUN git clone https://github.com/albmoriconi/yosys-als.git
+RUN git clone https://github.com/SalvatoreBarone/AMOSA.git
+# RUN git clone https://github.com/SalvatoreBarone/yosys-als.git
 
 ## Compiling Boolector
 WORKDIR /boolector
@@ -37,6 +39,13 @@ RUN make install -j `nproc`
 ## Compiling Yosys
 WORKDIR /yosys
 RUN make -j `nproc`
+
+## Installing AMOSA
+RUN mkdir -p /AMOSA/build
+WORKDIR /AMOSA/build
+RUN cmake ..
+RUN make -j `nproc`
+RUN make install
 
 ## Compiling Yosys-als
 # RUN mkdir -p /yosys-als/build
