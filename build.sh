@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo docker build -t "yosys-als-docker" .
+docker build -t "yosys-als-docker" .
