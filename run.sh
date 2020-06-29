@@ -30,4 +30,4 @@ echo $xilinx_vivado
 
 xhost local:docker
 mkdir -p als-shared
-docker run --rm -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix -v $catalog_path:/yosys-als/scripts/catalogue.db -v $xilinx_vivado:/vivado -v $PWD/als-shared:/yosys-als/scripts/als-shared --privileged -it "yosys-als-docker" /bin/zsh
+docker run --rm -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix -v $catalog_path:/yosys-als/scripts/catalogue.db -v $xilinx_vivado:/vivado -v $PWD/als-shared:/yosys-als/scripts/als-shared --privileged -it "yosys-als" /bin/zsh

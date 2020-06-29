@@ -3,8 +3,8 @@ LABEL maintainer="Salvatore Barone <salvator.barone@gmail.com>"
 LABEL maintainer="Alberto Moriconi <albmoriconi@gmail.com>"
 
 RUN apt-get update
-RUN apt-get install -y 	check libxml2-dev libssl-dev lcov doxygen \
-						doxygen-gui doxygen-latex wget g++ make zsh vim-nox \
+RUN apt-get install -y 	libssl-dev lcov doxygen \
+						wget g++ make zsh vim-nox \
 						fonts-powerline fzf git openssh-client build-essential \
 						clang bison flex libreadline-dev gawk tcl-dev \
 						libffi-dev graphviz xdot pkg-config python3 \
@@ -44,17 +44,20 @@ RUN 7z x LGSynth91.7z
 
 ## Compiling Boolector
 WORKDIR /boolector
+RUN git checkout 3.2.0
 RUN ./contrib/setup-lingeling.sh
 RUN ./contrib/setup-btor2tools.sh
 RUN ./configure.sh --shared
 WORKDIR /boolector/build
 RUN make -j `nproc`
-RUN make install -j `nproc`
+RUN make install
 
 ## Compiling Yosys
 WORKDIR /yosys
+RUN git checkout yosys-0.9
+RUN make config-gcc
 RUN make -j `nproc`
-RUN make install -j `nproc`
+RUN make install 
 
 ## Compiling Yosys-als
 RUN mkdir -p /yosys-als/build
@@ -66,6 +69,7 @@ RUN make install_plugin
 WORKDIR /
 
 #setting libray paths
+RUN sed -i "s/vivado/\/vivado\/bin\/vivado/g" /yosys-als/scripts/als.sh
 RUN ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so /usr/lib/x86_64-linux-gnu/libtinfo.so.5
 RUN echo "/usr/local/lib/" >> /etc/ld.so.conf
 RUN ldconfig
