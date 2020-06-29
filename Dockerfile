@@ -12,10 +12,6 @@ RUN apt-get install -y 	check libxml2-dev libssl-dev lcov doxygen \
 						libsqlite3-dev libboost-filesystem-dev zlib1g-dev curl \
 						libeigen3-dev gdb libsqlite3-dev libsqlite3-0 p7zip-full
 
-#setting libray paths
-RUN echo "/usr/local/lib/" >> /etc/ld.so.conf
-RUN ldconfig
-
 ## Getting oh-my-zsh and vim plugins
 RUN wget --quiet https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 RUN sed -i "s/git/git sudo docker fzf/g" ~/.zshrc
@@ -68,3 +64,8 @@ RUN make -j `nproc`
 RUN make install_plugin
 
 WORKDIR /
+
+#setting libray paths
+RUN ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so /usr/lib/x86_64-linux-gnu/libtinfo.so.5
+RUN echo "/usr/local/lib/" >> /etc/ld.so.conf
+RUN ldconfig
