@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t "yosys-als" .
+docker build --no-cache -t "yosys-als" .
