@@ -15,7 +15,7 @@ RUN apt-get install -y 	libssl-dev lcov doxygen \
 ## Getting oh-my-zsh and vim plugins
 RUN wget --quiet https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 RUN sed -i "s/git/git sudo docker fzf/g" ~/.zshrc
-RUN sed -i "s/robbyrussell/af-magic/g" ~/.zshrc
+RUN sed -i "s/robbyrussell/xiong-chiamiov-plus/g" ~/.zshrc
 # RUN	git clone https://gitlab.com/SalvatoreBarone/myvimrc.git && \
 # 	cp myvimrc/vimrc /root/.vimrc && \
 # 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && \
