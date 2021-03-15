@@ -1,11 +1,7 @@
 tags
 *.lock
 
-LGSynth91/
-
 LGSynth91.7z
-
-als-shared/
 
 .hdl_checker/
 
