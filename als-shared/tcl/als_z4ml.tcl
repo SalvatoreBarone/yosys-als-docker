@@ -25,6 +25,7 @@ if { [string equal [file extension $source_file] .sv] } {
 yosys hierarchy -check -top $module_name
 
 # Approximate logic synthesis
+yosys flatten
 yosys splitnets -ports
 yosys als -d -m epsmax -w \\24 0 -w \\25 1 -w \\26 2 -w \\27 4   
 yosys delete

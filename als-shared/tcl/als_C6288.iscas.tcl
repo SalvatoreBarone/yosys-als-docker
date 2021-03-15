@@ -25,6 +25,7 @@ if { [string equal [file extension $source_file] .sv] } {
 yosys hierarchy -check -top $module_name
 
 # Approximate logic synthesis
+yosys flatten
 yosys splitnets -ports
 yosys als -d -m epsmax -w \\6200GAT(2403) 0 -w \\3211GAT(1128) 1 -w \\3552GAT(1275) 2 -w \\6150GAT(2378) 3 -w \\545GAT(287) 4 -w \\1581GAT(423) 5 -w \\6270GAT(2438) 6 -w \\5308GAT(2031) 7 -w \\6287GAT(2444) 8 -w \\2223GAT(700) 9 -w \\6240GAT(2423) 10 -w \\6250GAT(2428) 11 -w \\6190GAT(2398) 12 -w \\5971GAT(2309) 13 -w \\2877GAT(983) 14 -w \\4946GAT(1876) 15 -w \\6220GAT(2413) 16 -w \\4241GAT(1572) 17 -w \\6160GAT(2383) 18 -w \\2548GAT(840) 19 -w \\6180GAT(2393) 20 -w \\5672GAT(2187) 21 -w \\6280GAT(2443) 22 -w \\3895GAT(1423) 23 -w \\6210GAT(2408) 24 -w \\4591GAT(1722) 25 -w \\6230GAT(2418) 26 -w \\6260GAT(2433) 27 -w \\1901GAT(561) 28 -w \\6123GAT(2368) 29 -w \\6170GAT(2388) 30 -w \\6288GAT(2447) 31
 yosys delete
